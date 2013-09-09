@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  ContactsViewController.h
 //  iContact
 //
 //  Created by Ivelin Ivanov on 9/9/13.
@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface ContactsViewController : UITableViewController
+
+@property (strong, nonatomic) NSArray *contactList;
 
 @end

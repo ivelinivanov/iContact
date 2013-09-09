@@ -14,13 +14,15 @@
 		5513ECEA17DDD9D9006D1BAE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5513ECE917DDD9D9006D1BAE /* main.m */; };
 		5513ECEE17DDD9D9006D1BAE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5513ECED17DDD9D9006D1BAE /* AppDelegate.m */; };
 		5513ECF117DDD9D9006D1BAE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5513ECEF17DDD9D9006D1BAE /* Main.storyboard */; };
-		5513ECF417DDD9D9006D1BAE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5513ECF317DDD9D9006D1BAE /* ViewController.m */; };
 		5513ECF617DDD9D9006D1BAE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5513ECF517DDD9D9006D1BAE /* Images.xcassets */; };
 		5513ECFD17DDD9D9006D1BAE /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5513ECFC17DDD9D9006D1BAE /* XCTest.framework */; };
 		5513ECFE17DDD9D9006D1BAE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5513ECDD17DDD9D9006D1BAE /* Foundation.framework */; };
 		5513ECFF17DDD9D9006D1BAE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5513ECE117DDD9D9006D1BAE /* UIKit.framework */; };
 		5513ED0717DDD9D9006D1BAE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5513ED0517DDD9D9006D1BAE /* InfoPlist.strings */; };
 		5513ED0917DDD9D9006D1BAE /* iContactTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5513ED0817DDD9D9006D1BAE /* iContactTests.m */; };
+		5513ED1417DDDF01006D1BAE /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5513ED1317DDDF01006D1BAE /* ContactsViewController.m */; };
+		5513ED1717DDF3B4006D1BAE /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5513ED1517DDF3B4006D1BAE /* Icon.png */; };
+		5513ED1817DDF3B4006D1BAE /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5513ED1617DDF3B4006D1BAE /* Icon@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,14 +47,16 @@
 		5513ECEC17DDD9D9006D1BAE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		5513ECED17DDD9D9006D1BAE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		5513ECF017DDD9D9006D1BAE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		5513ECF217DDD9D9006D1BAE /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		5513ECF317DDD9D9006D1BAE /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		5513ECF517DDD9D9006D1BAE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		5513ECFB17DDD9D9006D1BAE /* iContactTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iContactTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5513ECFC17DDD9D9006D1BAE /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		5513ED0417DDD9D9006D1BAE /* iContactTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iContactTests-Info.plist"; sourceTree = "<group>"; };
 		5513ED0617DDD9D9006D1BAE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5513ED0817DDD9D9006D1BAE /* iContactTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iContactTests.m; sourceTree = "<group>"; };
+		5513ED1217DDDF01006D1BAE /* ContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsViewController.h; sourceTree = "<group>"; };
+		5513ED1317DDDF01006D1BAE /* ContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsViewController.m; sourceTree = "<group>"; };
+		5513ED1517DDF3B4006D1BAE /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		5513ED1617DDF3B4006D1BAE /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,13 +116,14 @@
 		5513ECE317DDD9D9006D1BAE /* iContact */ = {
 			isa = PBXGroup;
 			children = (
+				5513ED1517DDF3B4006D1BAE /* Icon.png */,
+				5513ED1617DDF3B4006D1BAE /* Icon@2x.png */,
 				5513ECEC17DDD9D9006D1BAE /* AppDelegate.h */,
 				5513ECED17DDD9D9006D1BAE /* AppDelegate.m */,
 				5513ECEF17DDD9D9006D1BAE /* Main.storyboard */,
-				5513ECF217DDD9D9006D1BAE /* ViewController.h */,
-				5513ECF317DDD9D9006D1BAE /* ViewController.m */,
-				5513ECF517DDD9D9006D1BAE /* Images.xcassets */,
 				5513ECE417DDD9D9006D1BAE /* Supporting Files */,
+				5513ED1217DDDF01006D1BAE /* ContactsViewController.h */,
+				5513ED1317DDDF01006D1BAE /* ContactsViewController.m */,
 			);
 			path = iContact;
 			sourceTree = "<group>";
@@ -126,6 +131,7 @@
 		5513ECE417DDD9D9006D1BAE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5513ECF517DDD9D9006D1BAE /* Images.xcassets */,
 				5513ECE517DDD9D9006D1BAE /* iContact-Info.plist */,
 				5513ECE617DDD9D9006D1BAE /* InfoPlist.strings */,
 				5513ECE917DDD9D9006D1BAE /* main.m */,
@@ -228,9 +234,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5513ED1717DDF3B4006D1BAE /* Icon.png in Resources */,
 				5513ECF617DDD9D9006D1BAE /* Images.xcassets in Resources */,
 				5513ECE817DDD9D9006D1BAE /* InfoPlist.strings in Resources */,
 				5513ECF117DDD9D9006D1BAE /* Main.storyboard in Resources */,
+				5513ED1817DDF3B4006D1BAE /* Icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,7 +257,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5513ECF417DDD9D9006D1BAE /* ViewController.m in Sources */,
+				5513ED1417DDDF01006D1BAE /* ContactsViewController.m in Sources */,
 				5513ECEE17DDD9D9006D1BAE /* AppDelegate.m in Sources */,
 				5513ECEA17DDD9D9006D1BAE /* main.m in Sources */,
 			);
