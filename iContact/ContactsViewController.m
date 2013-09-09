@@ -91,7 +91,7 @@
             }
             else
             {
-                [contact setObject:[UIImage imageNamed:@"Icon.png"] forKey:@"image"];
+                [contact setObject:[UIImage imageNamed:@"Icon@2x.png"] forKey:@"image"];
             }
             
             [newArr addObject:contact];
@@ -101,7 +101,6 @@
         self.contactList = newArr;
     }
     
-    NSLog(@"%@", self.contactList);
     [self.tableView reloadData];
 
 }
@@ -122,8 +121,14 @@
     NSArray *sectionArray = [self.contactList filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF.name beginswith[c] %@", self.sections[indexPath.section]]];
     
     cell.textLabel.text = [sectionArray[indexPath.row] objectForKey:@"name"];
-    cell.detailTextLabel.text = [sectionArray[indexPath.row] objectForKey:@"phone"];
+    cell.detailTextLabel.text = [[sectionArray[indexPath.row] objectForKey:@"phone"] stringByReplacingOccurrencesOfString:@"+359 " withString:@"0"];
     cell.imageView.image = [sectionArray[indexPath.row] objectForKey:@"image"];
+    
+    cell.imageView.layer.cornerRadius = 15;
+    cell.imageView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    cell.imageView.layer.borderWidth = 3;
+    
+    cell.imageView.clipsToBounds = YES;
     
     return cell;
 }
