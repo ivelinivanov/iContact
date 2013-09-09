@@ -33,6 +33,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    self.sections = [NSArray arrayWithObjects:@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z", @"#", nil];
     
     [self loadContacts];
 }
@@ -61,7 +62,43 @@
     
     if (accessGranted)
     {
-        self.contactList = (__bridge_transfer NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBook);
+        NSArray *arr = (__bridge_transfer NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBook);
+        NSMutableArray *newArr = [[NSMutableArray alloc] init];
+        
+        for (int i = 0; i < [arr count]; i++)
+        {
+            ABRecordRef ref = CFArrayGetValueAtIndex((__bridge CFArrayRef)(arr), i);
+            
+            CFStringRef firstName, lastName;
+            
+            firstName = ABRecordCopyValue(ref, kABPersonFirstNameProperty);
+            lastName  = ABRecordCopyValue(ref, kABPersonLastNameProperty);
+            
+            NSMutableDictionary *contact = [[NSMutableDictionary alloc] init];
+            
+            [contact setObject:[NSString stringWithFormat:@"%@ %@", firstName, lastName] forKey:@"name"];
+            
+            ABMultiValueRef phones =(__bridge ABMultiValueRef)((__bridge NSString*)ABRecordCopyValue(ref, kABPersonPhoneProperty));
+            NSString *phone = (__bridge NSString*)ABMultiValueCopyValueAtIndex(phones, 0);
+            
+            [contact setObject:(phone == nil ? @"" : phone) forKey:@"phone"];
+            
+            NSData *imgData = (__bridge NSData*)ABPersonCopyImageDataWithFormat((__bridge ABRecordRef)(arr[i]), kABPersonImageFormatThumbnail);
+            UIImage *userImage = [UIImage imageWithData:imgData];
+            
+            if (userImage != nil) {
+                [contact setObject:userImage forKey:@"image"];
+            }
+            else
+            {
+                [contact setObject:[UIImage imageNamed:@"Icon.png"] forKey:@"image"];
+            }
+            
+            [newArr addObject:contact];
+        }
+        [newArr sortUsingDescriptors:[NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES], nil]];
+
+        self.contactList = newArr;
     }
     
     NSLog(@"%@", self.contactList);
@@ -71,14 +108,10 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.contactList count];
+    NSArray *sectionArray = [self.contactList filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF.name beginswith[c] %@", [self.sections objectAtIndex:section]]];
+    return  [sectionArray count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -86,34 +119,42 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    ABRecordRef ref = CFArrayGetValueAtIndex((__bridge CFArrayRef)(self.contactList), indexPath.row);
+    NSArray *sectionArray = [self.contactList filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF.name beginswith[c] %@", self.sections[indexPath.section]]];
     
-    CFStringRef firstName, lastName;
-    
-    firstName = ABRecordCopyValue(ref, kABPersonFirstNameProperty);
-    lastName  = ABRecordCopyValue(ref, kABPersonLastNameProperty);
-
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
-    
-    ABMultiValueRef phones =(__bridge ABMultiValueRef)((__bridge NSString*)ABRecordCopyValue(ref, kABPersonPhoneProperty));
-    NSString *phone = (__bridge NSString*)ABMultiValueCopyValueAtIndex(phones, 0);
-    cell.detailTextLabel.text = phone == nil ? @"" : phone;
+    cell.textLabel.text = [sectionArray[indexPath.row] objectForKey:@"name"];
+    cell.detailTextLabel.text = [sectionArray[indexPath.row] objectForKey:@"phone"];
+    cell.imageView.image = [sectionArray[indexPath.row] objectForKey:@"image"];
     
     return cell;
 }
 
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ABRecordRef ref = CFArrayGetValueAtIndex((__bridge CFArrayRef)(self.contactList), indexPath.row);
+    NSArray *sectionArray = [self.contactList filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF.name beginswith[c] %@", self.sections[indexPath.section]]];
 
-    ABMultiValueRef phones =(__bridge ABMultiValueRef)((__bridge NSString*)ABRecordCopyValue(ref, kABPersonPhoneProperty));
-    NSString *phone = (__bridge NSString*)ABMultiValueCopyValueAtIndex(phones, 0);
-    
-    NSLog(@"%@", phone);
+    NSString *phone = [sectionArray[indexPath.row] objectForKey:@"phone"];
     
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel:%@", [phone stringByReplacingOccurrencesOfString:@" " withString:@""]]]];
-
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 27;
+}
+
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
+{
+    return self.sections;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString*)title atIndex:(NSInteger)index
+{
+    return index;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return [self.sections objectAtIndex:section];
+}
 
 @end

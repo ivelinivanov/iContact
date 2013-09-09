@@ -10,6 +10,7 @@
 
 @interface ContactsViewController : UITableViewController
 
-@property (strong, nonatomic) NSArray *contactList;
+@property (strong, nonatomic) NSMutableArray *contactList;
+@property (strong, nonatomic) NSArray *sections;
 
 @end

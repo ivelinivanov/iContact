@@ -43,6 +43,8 @@
                             <outlet property="delegate" destination="Q3Z-C9-Aef" id="JQy-Zv-GMy"/>
                         </connections>
                     </tableView>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="czG-Gs-lkB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
